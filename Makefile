@@ -17,10 +17,10 @@ $(BUILD_DIR)/boot_sect.bin: boot/boot.asm
     mkdir -p $(BUILD_DIR)
     $(AS) -f bin $< -o $@
 
-$(BUILD_DIR)/kernel.bin: $(BUILD_DIR)/kernel.o $(BUILD_DIR)/kernel.o
+$(BUILD_DIR)/kernel.bin: $(BUILD_DIR)/kernel_entry.o $(BUILD_DIR)/kernel.o
     $(LD) -o $@ -T boot/linker.ld $^ --oformat binary
 
-$(BUILD_DIR)/kernel.o: kernel/kernel.asm
+$(BUILD_DIR)/kernel_entry.o: kernel/kernel_entry.asm
     $(AS) -f elf $< -o $@
 
 $(BUILD_DIR)/kernel.o: kernel/kernel.c
